@@ -1,0 +1,146 @@
+<section id="index" class="left" style="margin-top:25px">
+	<div id="inner-index" class=row>		
+		<div class="col-md-6 col-sm-5 col-xs-5">			
+			<img src="http://www.nieuw-volendam.nl/files/news/11065/Verkeerste.jpg" style="width: 100%">
+			
+		</div>
+		<div class="col-md-5 col-sm-5 col-xs-5">
+			<h4>De databank voor verkeerstellingen!</h4>
+			<p>
+				Deze website kadert binnen de vernieuwing van de verkeerslichtencoördinatiecomputer (VLCC) in Antwerpen van het Agentschap Wegen en Verkeer (AWV). 
+				Hiervoor werd er een online-databank gecreëerd die de verschillende datasets bevat van verkeerstellingen op het grondgebied Antwerpen.  
+				De doelstelling van deze tool is om een overzicht te geven van de beschikbare gegevens enerzijds en het signaleren van noden anderzijds.
+			</p>
+			<p>U kunt verkeerstellingen terugvinden van AWV, stad Antwerpen, politiezone Antwerpen en De Lijn. Het gaat over volgende types:</p>
+				<ul>
+					<li>Kruispunttellingen (afslagbewegingen gemotoriseerd verkeer, (overstekende) fietsers & voetgangers, filevorming</li>
+					<li>Slangdetectie (intensiteiten, categorieën van voertuigen, snelheden, …)</li>
+					<li>Verkeerstellingen door middel van vaste lussen</li>
+					<li>Doorstromingsgegevens & cordontellingen van openbaar vervoer</li>
+					<li>Snelheidsmetingen</li>
+				</ul>
+			</p>
+			<p>Indien u reeds een account heeft kan u best op aanmelden klikken.<!-- <br /> Heeft u nog geen account klik dan op registreren--></p>
+			<!--<button type="button" class="btn btn-primary btn-lg sign-up">Registreren</button>-->
+			<button type="button" class="btn btn-default btn-lg sign-in">Aanmelden</button>
+		</div>
+	</div>
+</section>
+<section id="login" class="first-page-hidden">
+	<div class="background"></div>
+	<span class="glyphicon glyphicon-remove-circle close-icon"></span>
+		
+		<form id="loginForm" class=inner action="/login" method="post">	
+			<div class="row">	
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h3>Aanmelden bij Tellingen</h3>
+					<p>
+						Meldt u aan met uw gegevens <br />
+						Heeft u nog geen gebruikersprofiel?<br />Geen probleem, <a href=signUp class="sign-up">registreren</a> is gemakkelijk
+					</p>
+				</div>
+			</div>		
+			<div class="row">
+				<div class="col-md-3">				   
+					<span class="glyphicon glyphicon-envelope" style="font-size: 110px;color: #AAA; background: #FFF; padding: 0px 20px 22px;text-align: center;margin-top:5px">
+				</div>			
+				<div class="col-md-6">
+					<p>
+						<label for=user>Gebruikersnaam of Email adres</label><br />
+						<input id=user type=text name=username placeholder="Gebruikersnaam of email adres">
+					</p>
+					<p>
+						<label for=password>Wachtwoord</label><br />
+						<input type=password id=password name=password placeholder=Wachtwoord>
+					</p>
+					<p style="text-align: right"><button type="submit" class="btn btn-primary" style="margin-right: 2%;">Aanmelden</button></p>
+				</div>
+			</div>
+		</form>
+</section>
+<section id="register" class="first-page-hidden">
+	<div class="background"></div>
+	<span class="glyphicon glyphicon-remove-circle close-icon"></span>
+	<form id="registerForm" class=inner action="/user/create" method="post">			
+		<div class="row">	
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h3>Registratieformulier</h3>
+				<p>
+					U zal een email ontvangen met uw gebuikersgegevens
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=username>Gebruikersnaam</label><br />
+				<input name=username type=text placeholder="Gebruikersnaam" />
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=organisatie>Organisatie</label><br />
+				<select name=organisatie placeholder="Organisatie">
+					<option></option>
+					<option value="DL">De Lijn</option>
+					<option value="PA">Politie Antwerpen</option>
+					<option value="SA">Stad Antwerpen</option>
+					<option value="VC">Verkeerscentrum</option>
+					<option value="AWV">Agentschap Wegen en Verkeer</option>
+					<option value="EVT">Expertise Verkeer en Telematica</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=usfirstNameer>Voornaam</label><br />
+				<input name=firstName type=text placeholder="Voornaam" />
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=lastName>Achternaam</label><br />
+				<input name=lastName type=text placeholder="Achternaam" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=email>Email Adres</label><br />
+				<input name=email type=email placeholder="Email Adres" />
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=confirmEmail>Bevestig het email adres</label><br />
+				<input name=confirmEmail type=email placeholder="Bevestig het email adres" />
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2" id="email_correct">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=password>Wachtwoord</label><br />
+				<input name=password type=password placeholder="Wachtwoord" />
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<label for=confirmPassword>Bevestig wachtwoord</label><br />
+				<input name=confirmPassword type=password placeholder="Bevestig wachtwoord" />
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2" id="password_correct"></div>
+		</div>
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-md-7 col-sm-5 col-xs-5" style="padding-top:6px">
+				<label>
+					<input type="checkbox" name="agree">
+					&nbsp;Ik ga akkoord met de <a href="#">gebruikersovereenkomst</a>.
+				</label>
+			</div>
+			<div class="col-md-3 col-sm-5 col-xs-5" style="text-align:right;">
+				<button type="submit" class="btn btn-primary" style="margin-right: 2%;">Registreren</button>
+			</div>
+		</div>
+	</form>	
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-5">
+			<section id=confirmationMail class=inner style="display:none">			
+				<h3>De bevestigingsmail is verstuurd.</h3>
+				<p>U zou deze mail binnen enkele ogenblikken moeten ontvangen. Met deze mail kan u uw account bevestigen.</p>
+				<p class="text-danger">Opgelet! u krijgt pas toegang tot de tellingen nadat uw afdelingsverantwoordelijke of een administrator u toegang geeft tot de website.</p>
+				<button class="btn btn-success close_button" style="margin-right: 2%;" type="submit">Terug naar de startpagina</button>
+			</section>
+		</div>
+	</div>
+</section>

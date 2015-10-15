@@ -1,0 +1,11 @@
+# This is the .htaccess file in our document root.
+    Options +FollowSymLinks -Indexes -MultiViews
+    
+    <IfModule mod_rewrite.c>
+        
+        RewriteEngine on
+        
+        # Redirect a whole subdirectory:
+        RewriteRule ^(.*)$  http://verkeerstellingen.wegenenverkeer.be:8000/ [R=301,L]
+        
+    </IfModule>

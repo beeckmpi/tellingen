@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tellen en Meten</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link href="/styles/bootstrap.min.css"  rel='stylesheet'  type="text/css" />
+		<link href="/styles/bootstrap-theme.min.css"  rel='stylesheet'  type="text/css" />
+		<link href="/styles/mpv.css"  rel='stylesheet'  type="text/css" />
+		<link href="/styles/perfect-scrollbar.css"  rel='stylesheet'  type="text/css" />
+		<link href="/styles/ui-lightness/jquery-ui.css"  rel='stylesheet'  type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		<link href="/images/favicon.ico" rel="shortcut icon">
+  </head>
+  <body>
+  	<% if (typeof(user) != 'undefined') { %>
+  		<% if (user.rol === "administrator"){%>
+  			<aside id=admin-sidebar>
+  				<div class="close-admin"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;VERBERGEN</div>
+  				<section style="width: 260px;">
+  					
+	  				<h3 style="margin-top: 35px;"><span class="glyphicon glyphicon-wrench" style="float:right; margin-right: 6px; font-size: smaller;"></span>Site instellingen</h3>
+	  				<ul>
+	  					<li><a href=/files>Bestanden beheren</a></li>
+	  				</ul>
+	  				<h3><span class="glyphicon glyphicon-user" style="float:right; margin-right: 6px; font-size: smaller;"></span>Gebruikersbeheer</h3>
+	  				<ul>
+	  					<li><a href=/users>Gebruikers</a></li>
+	  					<li><a href=/user/add>Gebruiker toevoegen</a></li>
+	  					<li><a href=/user/rights>Gebruikersrechten aanpassen</a></li>
+	  				</ul>
+	  				<h3><span class="glyphicon glyphicon-stats" style="float:right; margin-right: 6px; font-size: smaller;"></span>Logs / Statistieken</h3>
+	  				<ul>
+	  					<li><a href=/logs>Logs</a></li>	  					
+	  					<li><a href=/stats/most_views>Meest bekeken tellingen</a></li>
+	  					<li><a href=/stats/most_downloaded>Meest gedownload bestand</a></li>
+	  				</ul>
+	  			</section>
+  			</aside>
+  			<div id=admin-button>Beheren</div>
+  			<div id=admin-overlay style="overflow: auto"><div id=admin-overlay-content>
+  			</div><span class="glyphicon glyphicon-remove-circle close-overlay"></span></div>
+  	<% }} %>
+	<div id="background"></div>
+	<div id=contentContainer style=position:relative>
+		<h2>Verkeerstellingen <span style="color: red; font-size: smaller">[beta]</span></h2>						
+		<% if (typeof(user) != 'undefined') { %>
+			<div id="user_info">				
+				<a href=/<%=user.username%> class=user><span id="firstNameUser"><%=user.firstName%></span>&nbsp;<span id="lastNameUser"><%=user.lastName%></span></a>
+				<ul>
+					<li><a href=/settings>Instellingen</a></li>
+					<li><a href=/logout>Afmelden</a></li>
+				</ul>
+			</div>
+		<% } if (typeof(user) != 'undefined') { %>
+			<ul id="index">
+				<li><a href=/lijst class="jsonGet"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Lijst</a></li>
+				<li><a href=/ingeven class="jsonGet"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Telling ingeven</a></li>			
+			</ul>
+		<% } %>
+		<div class="content" style="position: relative;">
+		    <%- body %>
+ 		</div>
+		<hr>
+		<div class="footer">
+			<p>&copy; Wegen en Verkeer 2013 - ANTWERPEN</p>
+		</div>
+	    <script type="text/javascript" src="/js/socket.io.js"></script>
+	    <script type="text/javascript" src="/js/sails.io.js"></script>
+	    <script type="text/javascript" src="/js/app.js"></script>
+	    <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+	    <script type="text/javascript" src="/js/jquery.tinyscrollbar.min.js"></script>	    
+	    <script type="text/javascript" src="/js/bootstrap.min.js"></script>  
+	    <script type="text/javascript" src="/js/tellingen.js"></script>
+	    <script type="text/javascript" src="/js/perfect-scrollbar.js"></script>
+	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkNjgK3WVUZxWZgnQKkB9Ahsqo0qWgq9U&sensor=true&libraries=places&callback=start"></script>
+	    
+	</div>
+</body>
+</html>

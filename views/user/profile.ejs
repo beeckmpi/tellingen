@@ -1,0 +1,57 @@
+<div class="row">	
+	<div class="col-md-4 col-sm-4 col-xs-4">	
+		<section id=settingsInformation  style="padding-left: 15px;">
+			<h3 style="margin-left: -10px;">Informatie</h3>
+			<div><div class=label-form>Naam:</div><div class="form-detail"><%=account.firstName%>&nbsp;<%=account.lastName%></div></div>			
+			<div><div class=label-form>Agentschap:</div><div class="form-detail"><%=account.organisatie%></div></div>
+			<div><div class=label-form>Email adres:</div><div class="form-detail"><a href=mailto:<%=account.email%>><%=account.email%></a></div></div>
+			<% if (user.fax != '') {%>
+				<div><div class=label-form>Fax:</div><div class="form-detail"><%=account.fax%></div></div>
+			<% } %>
+			<% if (user.telefoon != '')  { %>
+				<div><div class=label-form>telefoonnummer:</div><div class="form-detail"><%=account.telefoon%></div></div>
+			<% } %>
+			<% if (user.gsm != '') { %>
+				<div><div class=label-form>GSM nummer:</div><div class="form-detail"><%=account.gsm%></div></div>
+			<% } %>
+			<div>
+				<a href="/notifications/add/<%=account.username%>"  class="btn btn-default" style="display:inline-block; margin-top: -8px;">Notificaties inschakelen</a>
+				<span class="glyphicon glyphicon-info-sign"  id=help_tt style="display:inline-block; padding: 5px; font-size: 18px" data-toggle="tooltip" title="Als u de notificaties inschakeld dan krijgt u bij elke nieuwe telling een notificatie" data-placement="right" title="" data-original-title="Tooltip on right"></span>
+			</div>
+			<div style=margin-top:15px>
+				<a href="/bericht/<%=account.username%>" class="btn btn-info">
+					<span class="glyphicon glyphicon-envelope"></span> <%=account.firstName%> een bericht sturen.
+				</a>
+			</div>
+		</section>
+	</div>
+	<div class="col-md-8 col-sm-8 col-xs-8">
+		<h3>Tellingen</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th width=10%>Datum telling</th>
+					<th width=50%>Locatie</th>
+					<th>Data</th>
+					<th width=18%>Datum ingave</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% tellingen.forEach(function(telling){ %>
+					<tr>
+						<% if (telling.datumType == "1") { %>
+							<td><a href="/view/<%=telling.id%>" class="jsonGet"><%=telling.datumTelling%></a></td>
+						<% } else if (telling.datumType == "v_t") { %>
+							<td><a href="/view/<%=telling.id%>" class="jsonGet"><%=telling.datumTelling_van%> - <%=telling.datumTelling_tot%></a></td>
+						<% } else if  (telling.datumType == "jaarlijks") { %>
+							<td><a href="/view/<%=telling.id%>" class="jsonGet">Jaarlijks</a></td>
+						<% } %>
+						<td><a href="/view/<%=telling.id%>"><%-telling.locatie_namen.replace(/\;/g, '<br />')%></a></td>
+						<td><a href="/view/<%=telling.id%>"><%=telling.data%></a></td>
+						<td><a href="/view/<%=telling.id%>"><%=telling.createdAt%></a></td>
+					</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
+</div>	

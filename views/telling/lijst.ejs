@@ -1,0 +1,25 @@
+<div>Tellingen</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th width=10%>Datum</th>
+			<th width=50%>Locatie</th>
+			<th width=20%>Door</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% tellingen.forEach(function(telling){ %>
+			<tr>
+				<% if (telling.datumType == "1") { %>
+					<td><a href="/view/<%=telling._id%>" class="toOverlay"><%=telling.datumTelling%></a></td>
+				<% } else if (telling.datumType == "v_t") { %>
+					<td><a href="/view/<%=telling._id%>" class="toOverlay"><%=telling.datumTelling_van%> - <%=telling.datumTelling_tot%></a></td>
+				<% } else if  (telling.datumType == "jaarlijks") { %>
+					<td><a href="/view/<%=telling._id%>" class="toOverlay">Jaarlijks</a></td>
+				<% } %>
+				<td><a href="/view/<%=telling._id%>" class="toOverlay"><%-telling.locatie_namen.replace(/\;/g, '<br />')%></a></td>
+				<td><a href="/view/<%=telling._id%>" class="toOverlay"><%=telling.username%></a></td>
+			</tr>
+		<% }) %>
+	</tbody>
+</table>

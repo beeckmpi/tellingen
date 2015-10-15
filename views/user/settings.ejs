@@ -1,0 +1,128 @@
+<div class="row">	
+	<div class="col-md-3 col-sm-3 col-xs-3">	
+		<section id=settingsInformation>
+			<h3>Gebruikersgegevens</h3>
+			<p>U kan al uw persoonlijke gegevens hier aanpassen.</p>
+		</section>
+	</div>
+	<div class="col-md-9 col-sm-9 col-xs-9">	
+		<section id=settingsProfile class=settings>
+			<article class="setting">
+				<H3>Basis informatie <span class="glyphicon glyphicon-chevron-left"></span></H3>
+				<div class="setting-inner">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=username>Gebruikersnaam</label><br />
+							<input name=username type=text placeholder="Username"  value="<%=user.username%>" size=28/>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=organisatie>Organisatie</label><br />
+							
+							<select name=organisatie placeholder="Organisatie">
+								<option></option>
+								<option value="DL" <%=organisatie["DL"]%>>De Lijn</option>
+								<option value="PA" <%=organisatie["PA"]%>>Politie Antwerpen</option>
+								<option value="SA" <%=organisatie["SA"]%>>Stad Antwerpen</option>
+								<option value="VC" <%=organisatie["VC"]%>>Verkeerscentrum</option>
+								<option value="AWV" <%=organisatie["AWV"]%>>Agentschap Wegen en Verkeer</option>
+							</select>
+						</div>						
+					</div>					
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=firstName>Voornaam</label><br />
+							<input name=firstName type=text placeholder="Achternaam" value="<%=user.firstName%>" size=28/>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=lastName>Achternaam</label><br />
+							<input name=lastName type=text placeholder="Last Name"  value="<%=user.lastName%>" size=30/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-md-6 col-sm-6 col-xs-6 message">
+							
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6 button_container" style="text-align:right;">
+							<div><button type="button" class="btn btn-primary btn-sm settingSubmit" style="display:inline; margin-right: 20%" id="basisSettingSubmit">instelling opslaan</button></div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="setting">
+				<h3>Contactgegevens<span class="glyphicon glyphicon-chevron-down"></span></h3>
+				<div class="setting-inner">
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=email>Email adres</label><br />
+							<input name=email type=email placeholder="Email adres"  value="<%=user.email%>" size=28 />
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=fax>Fax</label><br />
+							<input name=fax type=text placeholder="Fax"  value="<%=user.fax%>" size=30 />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=telefoon>Telefoonnummer</label><br />
+							<input name=telefoon type=text placeholder="telefoonnummer"  value="<%=user.telefoon%>" size=28 />
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<label for=gsm>GSM nummer</label><br />
+							<input name=gsm type=text placeholder="GSM"  value="<%=user.gsm%>" size=28 />
+						</div>
+					</div>
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-md-6 col-sm-6 col-xs-6 message">
+							
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6  button_container" style="text-align:right;">
+							<div><button type="button" class="btn btn-primary btn-sm settingSubmit" style="display:inline; margin-right: 20%" id="emailSettingSubmit">instelling opslaan</button></div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="setting">
+				<h3>Wachtwoord<span class="glyphicon glyphicon-chevron-down"></span></h3>
+				<div class="setting-inner">
+					<div class="row">
+						<div class="col-md-5 col-sm-5 col-xs-5">
+							<label for=oldPassword>Oud wachtwoord</label><br />
+							<input name=oldPassword type=password placeholder="Oud wachtwoord" size=28 />
+						</div>
+					</div>				
+					<div class="row">
+						<div class="col-md-5 col-sm-5 col-xs-5">
+							<label for=user>Nieuw Wachtwoord</label><br />
+							<input name=password type=password placeholder="Wachtwoord" />
+						</div>
+						<div class="col-md-5 col-sm-5 col-xs-5">
+							<label for=user>Bevestig wachtwoord</label><br />
+							<input name=confirmPassword type=password placeholder="Bevestig wachtwoord" />
+						</div>
+						<div class="col-md-2 col-sm-2 col-xs-2" id="password_correct"></div>
+					</div>	
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-md-6 col-sm-6 col-xs-6 message">
+							
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6 button_container" style="text-align:right;">
+							<div><button type="button" class="btn btn-primary btn-sm settingSubmit" style="display:inline; margin-right: 20%" id="passwordSettingSubmit">instelling opslaan</button></div>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="setting">
+				<h3>Verwijder account<span class="glyphicon glyphicon-chevron-down"></span></h3>
+				<div class="setting-inner">
+					<p>Voor u uw account verwijderd, wij kunnen op geen enkele manier uw account terugplaatsen, dus denk goed na voor u deze stap neemt.</p>
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-md-6 col-sm-6 col-xs-6 col-md-offset-6 col-sm-offset-6 col-xs-offset-6" style="text-align:right;">
+							<div><button class="btn  btn-warning btn-sm" style="margin-right: 20%">Account Verwijderen</button></div>
+						</div>
+					</div>
+				</div>
+			</article>		
+		</section>
+	</div>
+</div>
+

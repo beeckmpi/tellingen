@@ -1,0 +1,14 @@
+<h3>Meest bekeken telling</h3>
+
+<div id="scrollbar2">
+	<div class="scrollbar"><div class="track"><div class="thumb rounded-corners"><div class="end"></div></div></div></div>
+	<div class="viewport">
+		<div class="overview">
+			<ul class="list-group">
+				<% tellingen.forEach(function(telling){ %>
+					<li class="list-group-item"> <strong class=font-size:larger><%=telling.viewed%></strong> keer bekeken: <a href="/view/<%=telling.id%>" target="_blank" class="not_ajax"><%=telling.locatie_naam%></a> (id: <%=telling.id%>).</li>
+				<% }); %>
+			</ul>
+		</div>
+	</div>
+</div>

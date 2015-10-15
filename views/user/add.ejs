@@ -1,0 +1,111 @@
+<div class="row">	
+	
+	<div class="col-md-9 col-sm-9 col-xs-9">	
+		<form id="registerForm" class=inner action="/user/create" method="post">			
+			<div class="row">	
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h3>Registratieformulier</h3>
+					<p>
+						U zal een email ontvangen met uw gebuikersgegevens
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=username>Gebruikersnaam</label><br />
+					<input name=username type=text placeholder="Gebruikersnaam" />
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=organisatie>Organisatie</label><br />
+					<select name=organisatie placeholder="Organisatie">
+						<option></option>
+						<option value="DL">De Lijn</option>
+						<option value="PA">Politie Antwerpen</option>
+						<option value="SA">Stad Antwerpen</option>
+						<option value="VC">Verkeerscentrum</option>
+						<option value="AWV">Agentschap Wegen en Verkeer</option>
+						<option value="EVT">Expertise Verkeer en Telematica</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=usfirstNameer>Voornaam</label><br />
+					<input name=firstName type=text placeholder="Voornaam" />
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=lastName>Achternaam</label><br />
+					<input name=lastName type=text placeholder="Achternaam" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=email>Email Adres</label><br />
+					<input name=email type=email placeholder="Email Adres" />
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=confirmEmail>Bevestig het email adres</label><br />
+					<input name=confirmEmail type=email placeholder="Bevestig het email adres" />
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-2" id="email_correct">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=password>Genereer Wachtwoord</label><br />
+					<button class="" id="gen_password" style="margin: 5px 0px;">Genereer Wachtwoord</button>
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=password>Gegenereert Wachtwoord</label><br />
+					<div id="generated_password" value="" class="text-info" style="font-weight:bold; padding: 6px 12px 6px 0px; font-size: 14px; line-height: 1.43"></div>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=password>Wachtwoord</label><br />
+					<input name=password type=password placeholder="Wachtwoord" />
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=confirmPassword>Bevestig wachtwoord</label><br />
+					<input name=confirmPassword type=password placeholder="Bevestig wachtwoord" />
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-2" id="password_correct"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-sm-5 col-xs-5">
+					<label for=rol>Rol</label><br />
+					<select name=rol placeholder="Rol">
+						<option></option>
+						<option value="niet_geautoriseerd">Niet geautoriseerd</option>
+						<option value="gebruiker">Gebruiker</option>
+						<option value="administrator">Administrator</option>
+					</select>
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5">				
+					<div class="checkbox">
+						<br />
+						<label>
+							<input type="checkbox" name="mailconfirmed">
+							&nbsp;&nbsp;Stuur de gebruiker een email
+						</label>.
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2 col-xs-2" id="password_correct"></div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-5 col-sm-5 col-xs-5" style="padding-top:6px">
+					&nbsp;
+				</div>
+				<div class="col-md-5 col-sm-5 col-xs-5" style="text-align:right;">
+					<button type="submit" class="btn btn-primary" style="margin-right: 20%;">gebruiker toevoegen</button>
+				</div>
+			</div>
+		</form>	
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-3">	
+		<section id=settingsInformation>
+			<h3>Gebruiker toevoegen</h3>
+			<p>Voeg een gebruiker toe aan de applicatie</p>
+		</section>
+	</div>
+</div>

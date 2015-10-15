@@ -1,0 +1,141 @@
+<% if (!ajax) { %>
+	<div style="min-height:500px; position: relative">
+<% } %>
+<div id="map-canvas-telling"  data-ids="<%=data.locatie_ids%>" data-location="<%=data.locatie_coordinaten%>" data-types="<%=data.types%>" data-adres="<%=data.locatie_namen%>"></div>
+<div style="width: 45%; position: absolute; top: 10px; right: 30px">
+	<article style="">
+		<div class="row" id="choose_pic">	
+			<div class="col-md-12 col-sm-12 col-xs-12 bewerken_pagina">		
+				<!--<a href="/bewerken/<%=data.id%>" class="glyphicon glyphicon-pencil bewerken"></a>-->
+				<% if ((user.rol === "administrator") || (user.username == account.username)) {%>
+					<!--<ul class="nav nav-pills" style="margin: 0 15px 6px">
+						<li class="active">
+							<a href="/view/<%=data.id%>" class="jsonGet">Bekijken</a>
+						</li>
+						<li>
+							
+						</li>
+						<li>
+							<a href="/telling/stats/viewed/<%=data.id%>" class="jsonGet">Stats: Bekeken</a>
+						</li>
+						<li>
+							<a href="/telling/stats/downloads/<%=data.id%>" class="jsonGet">Stats: downloads</a>
+						</li>
+					</ul>-->
+					<a href="/bewerken/<%=data.id%>" class="jsonGet glyphicon glyphicon-pencil editTelling"></a>
+				<% } %>
+				<h3 style="margin: 0px; padding-left: 10px; padding-top: 0px;width:100%"><%=data.locatie_namen.replace(/[;]/g, '\n')%></h3>	
+				<div style="margin-bottom: 12px; padding-left: 10px;font-size:11px;">Aangemaakt op <%=data.createdAt%> door <a href="/<%=account.username%>"><%=account.firstName%> <%=account.lastName%></a>
+					<% if (data.createdAt !== data.updatedAt) { %> 
+						, laatst gewijzigd op <%=data.updatedAt%>
+					<% } %>
+				</div>							
+			</div>
+		</div>	
+		<div class="row" style="padding-left: 10px;">
+			<div style="padding-left: 15px; margin-bottom: 10px;">
+					<div class=label-form>Locatie tellingen:</div>
+					<% 
+					var locaties = data.locaties;
+					locaties.forEach(function(locatie){
+						var plaatsnaam = locatie.plaatsnaam;
+						var plaatsnaamArr = plaatsnaam.split(', ');	
+						if (locatie.info === undefined){
+							locatie.info = '';
+						}
+					%> 
+						<button type="button" class="place_information" id=<%=locatie.id%> data-container="body" data-toggle="popover" title="<%=plaatsnaamArr[0]%><br> <%=plaatsnaamArr[1]%> <span style='font-size: x-small'>type: <%=locatie.type%></span>" data-container="body" data-content="<%=locatie.info%>">
+							<%=plaatsnaamArr[0]%> <br /> <%=plaatsnaamArr[1]%>
+						</button>
+					<% }) %>
+				</div>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<!--<div>
+					<div class=label-form>Locatie tellingen:</div><div class="form-detail"><%- data.locatie_namen.replace(/[;]/g, '<br />')%></div>
+				</div>-->
+				<% if (data.datumType == '1') { %>
+				<div style="display:inline-block">
+					<div class=label-form>Datum telling:</div><div class="form-detail"><%=data.datumTelling%></div>
+				</div>
+				<% } else if (data.datumType == 'v_t') { %> 
+				<div style="display:inline-block">
+					<div class=label-form>Datum telling van:</div><div class="form-detail"><%=data.datumTelling_van%></div>
+				</div>					
+				<div style="display:inline-block">
+					<div class=label-form>Datum telling tot:</div><div class="form-detail"><%=data.datumTelling_tot%></div>
+				</div>
+				<% } else if (data.datumType = 'jaarlijks') { %>
+					
+				<% } if (data.typeTelling !== "" && data.typeTelling !== null) {%>
+				<div>
+					<div class=label-form>Type telling:</div><div class="form-detail"><%=data.typeTelling%></div>
+				</div>
+				<% } %>
+				<% if (data.typeVoertuig !== "" && data.typeVoertuig !== undefined) {%>
+				<div>
+					<div class=label-form>Vervoersmodus:</div><div class="form-detail"><%=data.typeVoertuig%></div>
+				</div>
+				<% } %>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<% if (data.opmerkingen !== "") {%>					
+						<div class=label-form>Opmerkingen:</div><div class="form-detail"><%=data.opmerkingen%></div>					
+				<% } %>
+			</div>
+		</div>
+		<div class="row" style="padding-left: 15px;">
+			<% if (data.type_ingave === 'opvragen') {%>											
+				<div class="col-md-12 col-sm-12 col-xs-12 row">
+					<div  class="alert alert-info" style="padding: 5px; margin-left: 15px; max-width: 80%">De gebruiker stelt de bestanden niet ter beschikking via de website. U kan de gegevens best opvragen via de onderstaande gegevens.</div>
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<% if (data.tellingId !== "") {%>	
+							<div>								
+								<div class=label-form>Telling ID:</div><div class="form-detail"><%=data.tellingId%></div>
+							</div>
+						<% } %>
+						<% if (((user.rol === "administrator") || (user.username == account.username)) && (data.priveOpmerkingen !== "")) {%>	 
+						<div>
+							<div class=label-form>Persoonlijke opmerkingen:</div><div class="form-detail"><%=data.priveOpmerkingen%></div>
+						</div>		
+						<% } %>
+					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<% if (data.telZichtbaar == "on") {%>					
+							<div>
+								<div class=label-form>Telefoonnummer:</div><div class="form-detail"><%=account.telefoon%></div>
+							</div>
+						<% } %>
+						<% if (data.emailZichtbaar == "on") {%>
+							<div>
+								<div class=label-form>Email:</div><div class="form-detail"><a href=mailto:<%=account.email%>><%=account.email%></a></div>
+							</div>
+						<% } %>
+					</div>					
+				</div>
+			<% } else { %>		
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<% if (data.filenames != '' && data.filenames != undefined) { %>
+					<div class=label-form>geuploade bestanden:</div>
+					<ul id=files>
+					<%
+						if (data.filenames.indexOf(", ") != -1){
+							var filenames_arr = data.filenames.split(', ');
+							filenames_arr = filenames_arr.reverse();
+							filenames_arr.forEach(function(filename){ %>
+								<li><a href="/download/<%=filename%>" target="_blank"><span class="glyphicon glyphicon-cloud-download">&nbsp;<%=filename%></span></a></li>							
+							<% }); 
+						} else { %>
+							<li><a href="/download/<%=data.filenames%>" target="_blank"><span class="glyphicon glyphicon-cloud-download"></span> <%=data.filenames%></a></li>	
+						<% } %>							
+					</ul>
+					<% } else { %>
+						<div class="alert alert-info" style="padding: 5px; margin-left: 10px; max-width: 80%">De gebruiker heeft nog geen bestanden geupload.</div> 
+					<% } %>
+				</div>
+			<% } %>	
+		</div>	
+	</article>
+</div>
+<% if (!ajax) { %>
+	</div>
+<% } %>

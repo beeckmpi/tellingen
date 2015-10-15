@@ -1,0 +1,51 @@
+<div class="row">
+	
+	<div class="col-md-12 search-container">
+		<div id="map-canvas" style="margin: 0px 0px"></div>
+		<input type=text placeholder="Zoek naar een gemeente, straat of locatie..." id="searchTextField">
+	</div>
+	<!--<div class="col-md-0"><div id="map-info" style="margin: 0px 0px"></div></div>-->
+	<div class="col-md-6" style="display:none">
+		
+		<div id=locationTelling>
+			<h4>De laatste 10 tellingen</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th width=10%>Datum</th>
+						<th width=50%>Locatie</th>
+						<th width=20%>Door</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% tellingen.forEach(function(telling){ %>
+						<tr>
+							<% if (telling.datumType == "1") { %>
+								<td><a href="/view/<%=telling.id%>" class="toOverlay"><%=telling.datumTelling%></a></td>
+							<% } else if (telling.datumType == "v_t") { %>
+								<td><a href="/view/<%=telling.id%>" class="toOverlay"><%=telling.datumTelling_van%> - <%=telling.datumTelling_tot%></a></td>
+							<% } else if  (telling.datumType == "jaarlijks") { %>
+								<td><a href="/view/<%=telling.id%>" class="toOverlay">Jaarlijks</a></td>
+							<% } %>
+							<td><a href="/view/<%=telling.id%>" class="toOverlay"><%-telling.locatie_namen.replace(/\;/g, '<br />')%></a></td>
+							<td><a href="/view/<%=telling.id%>" class="toOverlay"><%=telling.username%></a></td>
+						</tr>
+					<% }) %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id=makers style="position: fixed; top: 40px; bottom: 40px; right: 15px; width: 300px; padding: 10px 10px; border: 1px solid #ccc; background: #fff; overflow-y:auto; display:none">
+		<b>Markers</b>
+		<ol id="marker-container"></ol>
+	</div>
+	<div id=tellingOverlayContainer>
+		<div id=tellingOverlay>
+			<button type="button" class="close" style="z-index:1035"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<div class="content"></div>
+		</div>
+	</div>
+</div>
+<script>
+
+</script>

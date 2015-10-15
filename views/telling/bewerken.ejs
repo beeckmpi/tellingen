@@ -1,0 +1,307 @@
+<div class="row">	
+	<div class="col-md-3 col-sm-3 col-xs-3">	
+		<section id=settingsInformation>
+			<h3 style=font-size:22px;margin-top:5px>Telling bewerken</h3>
+			<p>Op deze pagina kan u uw telling bewerken.</p>
+			<p>Indien de gegevens niet worden opgeladen is het mogelijk om een automatische mail te laten opstellen, zodat mensen of organisaties de gegevens via deze mail kunnen opvragen</p>
+		</section>
+	</div>
+	<div class="col-md-9 col-sm-9 col-xs-9">	
+		<article>
+			<form id="tellingenIngeven" action="/telling/save/<%=telling.id%>" method="post">
+				<div class="row" id="choose_pic">	
+					<div class="col-md-12 col-sm-12 col-xs-12">							
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div>
+								<label for=type_ingave>Type</label>
+								<select name="type_ingave">
+									<option value="opvragen" <%=telling.type_ingave.opvragen%>>Opvragen</option>
+									<option value="uploaden" <%=telling.type_ingave.uploaden%>>Uploaden</option>								
+								</select>
+							</div>
+							<div id="uploadenContainer" style="display: none">
+								<p style="font-size: smaller; text-align: center; width: 80%">Maxmimum grote: 100MB</p>
+								<form id="upload_file" style="display:none;" action="upload">
+									<input type="file" id="uploadFile" name="filename" style="display:none;" multiple/>
+								</form>
+								<p><a class="btn btn-info dropzone" href="#" role="button">Bijlage Kiezen & Uploaden</a></p>
+								<div class="progress progress-striped active" style="width: 80%; margin-top: 10px; display: none;">
+								  <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+								    <span class="sr-only">45% Complete</span>
+								  </div>
+								</div>
+								<div  style="margin:8px 0 8px">
+									<label for=filenames>Geuploade bestanden:</label>
+									<% if (telling.filenames !== undefined) {%>
+										<input type=hidden name=filenames id=filenames value="<%=telling.filenames%>" />
+									<% } else { %>
+										<input type=hidden name=filenames id=filenames value="" />
+									<% } %>
+									<ul id=uploadedFiles>
+									
+									</ul>
+								</div>	
+							</div>
+							<div id="opvraagContainer">
+								<div>
+									<label for=kmpunt>Telling ID</label>
+									<input name=tellingId placeholder="Telling ID" type=text value="<%=telling.tellingId%>" />	
+								</div>					
+								<div style=margin-top:8px>
+									<input type="checkbox" name="telZichtbaar" id="telZichtbaar" <%=telling.telZichtbaar%>><label for=telZichtbaar  style="padding-top:-5px">&nbsp;&nbsp;Toon mijn telefoonnummer.</label>
+								</div>
+								<div style="margin:8px 0 8px">
+									<input type="checkbox" name="emailZichtbaar" id="emailZichtbaar" <%=telling.emailZichtbaar%>><label for=emailZichtbaar>&nbsp;&nbsp;Toon mijn Email adres.</label>
+								</div>
+								<div>
+									<label for=priveOpmerkingen>Persoonlijke opmerkingen</label>
+									<textarea name=priveOpmerkingen placeholder=Opmerkingen rows=5><%=telling.priveOpmerkingen%></textarea>
+									<p style="font-size:x-small; color: #999">Niet zichtbaar voor anderen.</p>
+								</div>		
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-8 col-xs-12">
+							<div>
+								<label for=Locatie>Locatie telling</label>
+								<div style="" id=form_locatie><a href="#locatie_toevoegen" class="edit-location"><%- telling.locatie_namen.replace(/\;/g, '<br />')%></a></div>
+								<div class="subText">GPS Coördinaten: <div  id="locatie_coordinaten"><%- telling.locatie_coordinaten.replace(/\;/g, '<br />')%></div></div>
+								<input type="hidden" id="locaties" name="locaties" required=true value="<%=telling.locatie_vol%>">
+								<input type="hidden" id="locatie_naam" name="locatie_naam" required=true value="<%=telling.locatie_namen%>">
+								<input type="hidden" id="locatie_coordinaten_hidden" name="locatie_coordinaten" value="<%=telling.locatie_coordinaten%>" required=true>
+							</div>
+							<!--<div>
+								<label for=typeTelling>Type Telling</label>
+								<input name=typeTelling id=typeTelling type=text list="tellingType" placeholder="Type tekst"/>
+								<datalist id="tellingType">
+									<option value="Kruispunttelling">								  								  
+									<option value="OV-doorstromingsgegevens">
+									<option value="OV-cordontellingen">
+									<option value="OV-lijnvoering">
+									<option value="Slang/doorsnedetelling">
+									<option value="Snelheidsmeting">
+									<option value="Permanente detectielus">
+								</datalist>
+							</div>
+							<div>
+								<label for=kmpunt>Kilometerpunt</label>
+								<input name=kmpunt placeholder=Kilometerpunt type=text  value="<%=telling.kmpunt%>" />	
+							</div>-->
+							<div>
+								<label for=datumType>Datum Telling (type)</label>
+								<select name=datumType id=datumType>
+									<option>--selecteer--</option>
+									<option value=1 <%=telling.datumType["een"]%>>Alle tellingen op 1 dag</option>
+									<option value=v_t <%=telling.datumType["v_t"]%>>Van - Tot</option>
+									<option value=jaarlijks <%=telling.datumType["jaarlijks"]%>>Jaarlijks</option>
+								</select>
+							</div>
+							<div style="display:none" class="1 datums">
+								<label for=datum>Datum telling</label>
+								<input name=datumTelling placeholder=Datum type=text class=datepicker value="<%=telling.datumTelling%>" />
+							</div>
+							<div style="display:none" class="v_t datums">
+								<label for=datum>Datum telling (van)</label>
+								<input name=datumTelling_van placeholder=Datum type=text class=datepicker value="<%=telling.datumTelling_van%>" />
+							</div>
+							<div style="display:none" class="v_t datums">
+								<label for=datum>Datum telling (tot)</label>
+								<input name=datumTelling_tot placeholder=Datum type=text class=datepicker value="<%=telling.datumTelling_tot%>" />
+							</div>
+							<!--<div>
+								<label for=data>Data</label>
+								<select name="data">
+									<option value="ongecontroleerd"  <%=telling.data["ongecontroleerd"]%>>Ongecontroleerd</option>
+									<option value="gecontroleerd" <%=telling.data["gecontroleerd"]%>>Gecontroleerd</option>
+								</select>
+							</div>-->
+							<div>
+								<label for=opmerkingen>Opmerkingen</label>
+								<textarea name=opmerkingen placeholder=Opmerkingen rows=5> <%=telling.opmerkingen%></textarea>
+							</div>
+							<div style="width: 100%; text-align: right; padding-right: 20%; margin-top: 10px">
+								<a href="/view/<%=telling.id%>" class="jsonGet btn btn-warning">Annuleren</a>
+								<button type=submit value="Telling Uploaden" class="btn btn-info" >Telling Bewerken</button>
+							</div>
+						</div>
+					</div>	
+				</div>		
+			</form>
+		</article>
+	</div>
+	<div id=tellingOverlayContainer>
+	    <div id=tellingOverlay>
+	        <button type="button" class="close" style="z-index:1035"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <div class="content" style="padding: 15px 15px">
+	            <h4>Geuploade bestanden aanpassen</h4>
+	            <div class="row">
+	                <div class="col-md-4">
+	                    <h5>Bestanden</h5>
+	                    <div id="bestanden" style="margin: 0px 0px"></div>
+	                </div>
+	                <div class="col-md-6" id="infoCol">
+	                    
+	                </div>                
+	           </div> 
+	           <div style="margin-top: 20px">     
+	            <button class="btn btn-warning">Annuleren</button>&nbsp;<button id="Bestanden_edit_opslaan" class="btn btn-info">Opslaan</button>
+	           </div>
+	           <div id="bestand-info-default" class="bestanden_clones" style="margin: 0px 0px; display: none; position: absolute; width:100%">
+	           <h5>Metadata</h5>
+	           		<div class="hidden">
+	           			<input type="hidden" name="extension">
+	           		</div>
+	           		<div class="">
+	                	<label for=datum>Naam</label>
+	                  	<input name=naam placeholder=Bestandsnaam type=text value="" />
+	                </div>
+	                <div class="">
+	                	<label for=datum>Datum</label>
+	                    <input name=datumBestand1 placeholder=Datum type=text class=datepicker value="" />
+	                </div>       
+	                <div>
+	                	<label for=datumType>Type voertuig</label>
+	                    <select name=datumType id=datumType>
+	                    	<option>--selecteer--</option>
+	                        <option value=Auto>Auto</option>
+	                        <option value=bus>Bus</option>
+	                        <option value=fiets>Fiets</option>
+	                        <option value=fiets>Vrachtverkeer</option>
+	                    </select>
+	                </div> 
+	                <div>
+	                    <label for=opmerkingen>Meer Informatie</label>
+	                    <textarea name=opmerkingen placeholder=Opmerkingen rows=5></textarea>
+	                </div>                                   
+	        	</div>      
+	        </div>
+	    </div>
+	</div>
+</div>
+<div id=overlay>	
+	<div id=map-canvas data-ids="<%=telling.locatie_ids%>" data-location="<%=telling.locatie_coordinaten%>" data-types="<%=telling.types%>" data-adres="<%=telling.locatie_namen%>"></div>
+	<input type=text placeholder="Locatie zoeken" id="searchTextField" value="">
+	<div style="position: absolute; top: 0px; right: 0px; bottom: 0px; width: 20%; padding: 8px 12px">
+		<h3 style="display:inline-block;">Locatie toevoegen</h3>
+		<i class="glyphicon glyphicon-info-sign help-sign"></i>
+		<div class="help" id="locatieHelp">
+			<p style="font-size: smaller">Zoek in het tekstvak naar de juiste locatie of klik op de juiste plaats. Als het icoontje op de plaats op de kaart staat dan klik je op "Plaats bewaren".</p>
+			<p style="font-size: smaller"> Als er een icoon op de kaart staat, dan kan u deze verslepen, als u het icoon loslaat dan wordt het dichtsbijzijnde adres gebruikt.</p>
+		</div>
+		<div id="place">
+		<% telling.locaties.forEach(function(locatie){ %>
+			<div class="place" id=<%=locatie.id%>>
+				<strong><%=locatie.plaatsnaam%></strong> <span class=subText>(Type:  <span class="type_locatie"><%=locatie.type%></span>)</span> <span class="glyphicon glyphicon-remove remove_location" id="<%=locatie.id.replace('place_', '')%>" style="font-size: xx-small; color: #555; cursor: pointer"></span>
+				<div class="edit_place_id place_id"><%=locatie.id%></div>
+				<div class="edit_place_naam place_naam"><%=locatie.plaatsnaam%></div>
+				<div class="edit_place_coordinaten place_coordinaten"><%=locatie.coordinaten%></div>
+				<div class="edit_place_info place_info"><%=locatie.info%></div>
+			</div>
+		<% }) %>
+		</div>
+		<div id="place_data" style="display:none"><%=telling.locatie_vol%></div>
+		<button class="btn btn-default btn-sm" id="close_overlay">Kaart sluiten</button>
+		<button class="btn btn-primary btn-sm" id=save_place style="display:inline-block;">Plaats Bewaren</button>
+	</div>
+	<div id="LocatieInformatieOverlay">
+		<div id="locatieText"></div>
+		<div id="locatieTextFixed"></div>
+		<div class="fadeIn">
+			<label for=editTypeTelling>Icoon telling</label>
+			<select id=editTypeTelling name=editTypeTelling class="typeTelling">
+				<option value="Kentekenregistratie">Kentekenregistratie</option>
+				<option value="Kruispunttelling">Kruispunttelling</option>
+				<option value="OV-cordontellingen">OV-cordontellingen</option>					  								  
+				<option value="OV-doorstromingsgegevens">OV-doorstromingsgegevens		
+				<option value="OV-lijnvoering">OV-lijnvoering</option>
+				<option value="PermanenteDetectielus">Permanente detectielus</option>
+				<option value="SlangDoorsnedetelling">Slang/doorsnedetelling</option>
+				<option value="Snelheidsmeting">Snelheidsmeting</option>
+			</select>
+			<div class="typeIcon editTypeIcon">
+				<img src="/images/cctv.png" class="Kentekenregistratie">
+			</div>
+		</div>	
+		<div class="fadeIn">
+			<div id=editOpmerkingLocatie placeholder="Informatie" contenteditable="True"></div>
+		</div>
+		<div style="margin-top: 15px; width: 100%; text-align: left;" class="fadeIn">
+			<button class="btn btn-default btn-sm" id="close_informatieOverlay">Annuleren</button>
+			<button class="btn btn-primary btn-sm" id=edit_place>Bewaren</button>
+			<button class="btn btn-danger btn-sm glyphicon glyphicon-trash editRemove_location" style=""></button>
+		</div>
+	</div>
+	<div id=infoOverlayContainer>
+		<div id="infoOverlay">
+			<div>
+				<label for=locatieNaam>Locatie</label>
+				<input disabled="disabled" type="text" name=locatieNaam id=locatieNaam />
+				<div id=locatieCo></div>
+			</div>
+			<div>
+				<label for=typeTelling>Icoon telling</label>
+				<select id=typeTelling name=typeTelling class="typeTelling">
+					<option value="Kentekenregistratie">Kentekenregistratie</option>
+					<option value="Kruispunttelling">Kruispunttelling</option>
+					<option value="OV-cordontellingen">OV-cordontellingen</option>					  								  
+					<option value="OV-doorstromingsgegevens">OV-doorstromingsgegevens		
+					<option value="OV-lijnvoering">OV-lijnvoering</option>
+					<option value="PermanenteDetectielus">Permanente detectielus</option>
+					<option value="SlangDoorsnedetelling">Slang/doorsnedetelling</option>
+					<option value="Snelheidsmeting">Snelheidsmeting</option>					
+				</select>
+				<div class="typeIcon">
+					<img src="/images/cctv.png" class="Kentekenregistratie">
+				</div>
+			</div>		
+			<div>
+				<label for=opmerkingLocatie>Informatie</label>
+				<div id=opmerkingLocatie placeholder="Informatie" contenteditable="True"></div>
+			</div>
+			<div class="btnContainer">
+				<button class="btn btn-default btn-sm" id="close_infoOverlay">Annuleren</button>
+				<button class="btn btn-primary btn-sm" id=save_icon>Icoon plaatsen</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="hiddenIcons">
+	<img src="/images/bus.png" class="OV-doorstromingsgegevens">
+	<img src="/images/busstop.png" class="OV-lijnvoering">
+	<img src="/images/cctv.png" class="Kentekenregistratie">
+	<img src="/images/junction.png" class="Kruispunttelling">
+	<img src="/images/speed_50.png" class="Snelheidsmeting">
+	<img src="/images/stargate-raw.png" class="OV-cordontellingen">
+	<img src="/images/street lus.png" class="PermanenteDetectielus">
+	<img src="/images/street slang.png" class="SlangDoorsnedetelling">
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Bestand bewerken</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        	<form id="bestand_bewerken">
+        		<div>
+        			<label for="bestandsnaam">Bestandsnaam</label>
+        			<input type="text" id="bestandsnaam" name="bestandsnaam" placeholder="Bestandsnaam" />
+        		</div>
+        		<div>
+        			<input type="checkbox" id="prive_bestand" name="prive_bestand">
+        			<label for="prive_bestand">Privé bestand (enkel zichtbaar voor de uploader)</label>        		
+        		</div>
+        	</form>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+        <button type="button" class="btn btn-primary">Bestand bewerken</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
